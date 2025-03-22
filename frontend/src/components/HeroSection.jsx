@@ -1,5 +1,6 @@
 import React from "react";
 import { FaUniversity, FaUserGraduate, FaBriefcase } from "react-icons/fa";
+import homeimg from "../../public/front.jpeg";
 const HeroSection = () => {
   return (
     <div>
@@ -27,7 +28,7 @@ const HeroSection = () => {
           <div className="md:w-1/2 flex justify-center">
             <div className="h-64 w-full md:h-96 bg-blue-800 rounded-lg relative overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
-                <FaUniversity className="h-24 w-24 text-yellow-500 opacity-50" />
+                <img src={homeimg} alt="" />
               </div>
               {/* This would be an image in a real implementation */}
               <div className="absolute bottom-4 left-4 right-4 p-4 bg-black bg-opacity-50 rounded">

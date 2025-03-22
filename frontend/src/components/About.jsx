@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import aboutImg from "../../public/about.webp";
 
 const About = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const About = () => {
               <div className="rounded-lg overflow-hidden shadow-xl">
                 <div className="bg-blue-200 h-64 sm:h-96">
                   <img
-                    src="/api/placeholder/800/600"
+                    src={aboutImg}
                     alt="Krishna University Campus"
                     className="w-full h-full object-cover"
                   />
