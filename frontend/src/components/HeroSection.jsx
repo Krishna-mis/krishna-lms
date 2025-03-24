@@ -1,7 +1,9 @@
 import React from "react";
 import { FaUniversity, FaUserGraduate, FaBriefcase } from "react-icons/fa";
 import homeimg from "../../public/front.jpeg";
+import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <div>
       {/* Hero Section */}
@@ -17,10 +19,17 @@ const HeroSection = () => {
               education at Krishna University.
             </p>
             <div className="mt-8 flex space-x-4">
-              <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-6 rounded-lg font-medium transition">
+              <button
+                onClick={() => navigate("/apply")}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-6 rounded-lg font-medium transition"
+              >
                 Apply Now
               </button>
-              <button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white py-3 px-6 rounded-lg font-medium transition">
+
+              <button
+                onClick={() => navigate("/about")}
+                className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white py-3 px-6 rounded-lg font-medium transition"
+              >
                 Learn More
               </button>
             </div>
@@ -153,9 +162,9 @@ const HeroSection = () => {
           </div>
 
           <div className="mt-6 text-center">
-            <a
-              href="#"
-              className="inline-flex items-center text-blue-900 hover:text-blue-700"
+            <button
+              className="text-blue-500 hover:underline"
+              onClick={() => navigate("/circulars")}
             >
               View all circulars
               <svg
@@ -172,7 +181,7 @@ const HeroSection = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 ></path>
               </svg>
-            </a>
+            </button>
           </div>
         </div>
       </div>

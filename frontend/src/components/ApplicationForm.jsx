@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { MdFamilyRestroom, MdEmail, MdSchool } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+const API_URL = "http://localhost:5000";
 
 const ApplicationForm = () => {
   const [formData, setFormData] = useState({
@@ -99,7 +100,7 @@ const ApplicationForm = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formErrors = validateForm();
@@ -110,11 +111,31 @@ const ApplicationForm = () => {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${API_URL}/api/applications/submit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit application");
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setErrors({ submit: data.message || "Submission failed" });
+      }
+    } catch (error) {
+      setErrors({ submit: error.message || "Error submitting application" });
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-    }, 1500);
+    }
   };
 
   if (submitted) {

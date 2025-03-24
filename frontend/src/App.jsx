@@ -8,6 +8,12 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ApplicationForm from "./components/ApplicationForm";
 import About from "./components/About";
+import Campus from "./components/Campus";
+import PlacementManagement from "./components/PlacementManagement";
+import AdminPlacement from "./components/Admin/AdminPlacement";
+import CircularAdmin from "./components/Admin/CircularAdmin";
+import Circular from "./components/Circular";
+import AdminAdmission from "./components/Admin/adminAdmission";
 
 // Layout Wrapper for Home & Courses
 function MainLayout({ children }) {
@@ -49,6 +55,30 @@ function App() {
           </MainLayout>
         }
       />
+      <Route
+        path="/campus"
+        element={
+          <MainLayout>
+            <Campus />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/placements"
+        element={
+          <MainLayout>
+            <PlacementManagement />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/circulars"
+        element={
+          <MainLayout>
+            <Circular />
+          </MainLayout>
+        }
+      />
 
       {/* Students Routes */}
       <Route path="/login" element={<Login />} />
@@ -56,6 +86,9 @@ function App() {
 
       {/* Admin Routes */}
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      <Route path="/admin/placements" element={<AdminPlacement />} />
+      <Route path="/admin/circulars" element={<CircularAdmin />} />
+      <Route path="/admin/admissions" element={<AdminAdmission />} />
     </Routes>
   );
 }

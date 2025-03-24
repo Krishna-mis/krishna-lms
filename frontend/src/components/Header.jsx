@@ -8,9 +8,39 @@ import {
   FaUserGraduate,
 } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const menuItems = [
+    { name: "Home", path: "/", icon: <FaHome className="mr-1" /> },
+    {
+      name: "About Us",
+      path: "/about",
+      icon: <FaInfoCircle className="mr-1" />,
+    },
+    {
+      name: "Circulars",
+      path: "/circulars",
+      icon: <FaNewspaper className="mr-1" />,
+    },
+    {
+      name: "Campus",
+      path: "/campus",
+      icon: <FaUniversity className="mr-1" />,
+    },
+    {
+      name: "Courses",
+      path: "/courses",
+      icon: <FaBriefcase className="mr-1" />,
+    },
+    {
+      name: "Placements",
+      path: "/placements",
+      icon: <FaBriefcase className="mr-1" />,
+    },
+  ];
 
   return (
     <div className="bg-gray-50">
@@ -27,56 +57,30 @@ function Header() {
               </div>
             </div>
 
-            {/* Desktop Navigation */}
+            {/* Desktop & Mobile Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a
-                href="/"
-                className="flex items-center hover:text-yellow-400 transition"
-              >
-                <FaHome className="mr-1" /> Home
-              </a>
-              <a
-                href="/about"
-                className="flex items-center hover:text-yellow-400 transition"
-              >
-                <FaInfoCircle className="mr-1" /> About Us
-              </a>
-              <a
-                href="#circulars"
-                className="flex items-center hover:text-yellow-400 transition"
-              >
-                <FaNewspaper className="mr-1" /> Circulars
-              </a>
-              <a
-                href="#campus"
-                className="flex items-center hover:text-yellow-400 transition"
-              >
-                <FaUniversity className="mr-1" /> Campus
-              </a>
-              <a
-                href="/courses"
-                className="flex items-center hover:text-yellow-400 transition"
-              >
-                <FaBriefcase className="mr-1" /> Courses
-              </a>
-              <a
-                href="#placements"
-                className="flex items-center hover:text-yellow-400 transition"
-              >
-                <FaBriefcase className="mr-1" /> Placements
-              </a>
-              <a href="/login">
-                <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded flex items-center transition">
-                  <FaUserGraduate className="mr-1" /> Login
+              {menuItems.map((item) => (
+                <button
+                  key={item.path}
+                  onClick={() => navigate(item.path)}
+                  className="flex items-center hover:text-yellow-400 transition"
+                >
+                  {item.icon} {item.name}
                 </button>
-              </a>
+              ))}
+              <button
+                onClick={() => navigate("/login")}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded flex items-center transition"
+              >
+                <FaUserGraduate className="mr-1" /> Login
+              </button>
             </div>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-200 hover:text-white focus:outline-none"
+                className="text-gray-200 hover:text-white focus:outline-none pt-5"
               >
                 {mobileMenuOpen ? (
                   <MdClose className="h-6 w-6" />
@@ -86,48 +90,34 @@ function Header() {
               </button>
             </div>
           </div>
-        </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-blue-800">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <a
-                href="#home"
-                className="block px-3 py-2 rounded hover:bg-blue-700 flex items-center"
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 flex flex-col space-y-2">
+              {menuItems.map((item) => (
+                <button
+                  key={item.path}
+                  onClick={() => {
+                    navigate(item.path);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center px-4 py-2 hover:text-yellow-400 transition"
+                >
+                  {item.icon} {item.name}
+                </button>
+              ))}
+              <button
+                onClick={() => {
+                  navigate("/login");
+                  setMobileMenuOpen(false);
+                }}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded flex items-center transition"
               >
-                <FaHome className="mr-2" /> Home
-              </a>
-              <a
-                href="#about"
-                className="block px-3 py-2 rounded hover:bg-blue-700 flex items-center"
-              >
-                <FaInfoCircle className="mr-2" /> About Us
-              </a>
-              <a
-                href="#circulars"
-                className="block px-3 py-2 rounded hover:bg-blue-700 flex items-center"
-              >
-                <FaNewspaper className="mr-2" /> Circulars
-              </a>
-              <a
-                href="#campus"
-                className="block px-3 py-2 rounded hover:bg-blue-700 flex items-center"
-              >
-                <FaUniversity className="mr-2" /> Campus
-              </a>
-              <a
-                href="#placements"
-                className="block px-3 py-2 rounded hover:bg-blue-700 flex items-center"
-              >
-                <FaBriefcase className="mr-2" /> Placements
-              </a>
-              <button className="w-full text-left bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded flex items-center mt-4">
-                <FaUserGraduate className="mr-2" /> Login
+                <FaUserGraduate className="mr-1" /> Login
               </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </nav>
     </div>
   );
